@@ -193,7 +193,9 @@ class DistributionMetric(object):
 
 
 class CacheMetric(object):
-    __slots__ = ("name", "cache_name", "hits", "misses", "size_callback")
+    __slots__ = (
+        "name", "cache_name", "hits", "misses", "evictions", "size_callback",
+    )
 
     def __init__(self, name, size_callback, cache_name):
         self.name = name
@@ -201,6 +203,7 @@ class CacheMetric(object):
 
         self.hits = 0
         self.misses = 0
+        self.evictions = 0
 
         self.size_callback = size_callback
 
@@ -209,6 +212,9 @@ class CacheMetric(object):
 
     def inc_misses(self):
         self.misses += 1
+
+    def inc_evictions(self, count=1):
+        self.evictions += count
 
     def render(self):
         size = self.size_callback()
