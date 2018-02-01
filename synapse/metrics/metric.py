@@ -225,6 +225,9 @@ class CacheMetric(object):
             """%s:hits{name="%s"} %d""" % (self.name, self.cache_name, hits),
             """%s:total{name="%s"} %d""" % (self.name, self.cache_name, total),
             """%s:size{name="%s"} %d""" % (self.name, self.cache_name, size),
+            """%s:evictions{name="%s"} %d""" % (
+                self.name, self.cache_name, self.evictions
+            ),
         ]
 
 
